@@ -77,7 +77,9 @@ cd airline-reservation-system
  ┣ ┣ 📜 requirements
  ┣ ┣ 📜 .gitignore
  ┣ ┣ 📜 README.md
+ ┣ ┣ 📂 docs
  ┣ 📜 README.md
+ 
 ```
 
 ---
