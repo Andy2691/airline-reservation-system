@@ -24,3 +24,5 @@ def get_application() -> FastAPI:
 
 
 app = get_application()
+
+

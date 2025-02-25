@@ -1,86 +1,91 @@
-# Microservicio: Búsqueda de Vuelos
+# ✈️ Microservicio: Buscar Vuelos
 
-## Descripción
-Este microservicio permite realizar la consulta de vuelos disponibles según origen, destino y fecha del vuelo.
+## 📌 Descripción
 
-## Tecnologías Utilizadas
-- **Lenguaje**: Python 3.10+
-- **Framework**: FastAPI
-- **Base de Datos**: PostgreSQL
-- **ORM**: SQLAlchemy
-- **Autenticación**: OAuth2 con JWT
-- **Gestión de Dependencias**: Pydantic
-- **Migraciones**: Alembic
-- **Versionado**: Git + GitHub
-- **Pruebas**: Pytest
+El microservicio **Búsqueda de Vuelos** permite realizar consultas de vuelos disponibles según origen, destino y fecha del vuelo.
 
-## Estructura del Proyecto
-```
-Buscar.Vuelos/
-│── app/
-│   ├── database/
-│   ├── models/
-│   ├── routes/
-│   ├── schema/
-│   ├── flights.py
-│── alembic/
-│── venv/
-│── main.py
-│── config.py
-│── requirements.txt
-│── alembic.ini
-│── README.md
-```
+### 📍 Funcionalidades principales
 
-## Instalación y Configuración
+- 🔍 **Búsqueda de vuelos por origen y destino**
+- 📅 **Filtrado por fecha de vuelo**
+- 📊 **Paginación de resultados**
 
-### 1. Clonar el Repositorio
+---
+
+## 📥 **Clonar el repositorio**
+
+Para obtener una copia local del proyecto, ejecuta el siguiente comando:
+
 ```bash
-git clone https://github.com/tu_usuario/buscar_vuelos.git
-cd buscar_vuelos
+git clone https://github.com/Andy2691/airline-reservation-system.git
+cd airline-reservation-system/buscar.vuelos
 ```
 
-### 2. Crear y Activar un Entorno Virtual
+---
+
+## ⚙️ **Configuración y Ejecución**
+
+### 🔹 **1️⃣ Configurar entorno virtual**
+Cada microservicio debe ejecutarse en su propio entorno virtual.
+
 ```bash
+# Windows
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+venv\Scripts\activate
+
+# Mac/Linux
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-### 3. Instalar Dependencias
+### 🔹 **2️⃣ Instalar dependencias**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar la Base de Datos
-Levantar un contenedor PostgreSQL con Docker:
+### 🔹 **3️⃣ Configurar la Base de Datos**
+Si aún no se ha levantado el contenedor PostgreSQL en la configuración principal del proyecto, ejecuta:
 ```bash
 docker run --name flights -e POSTGRES_PASSWORD=test -e POSTGRES_DB=flights -e POSTGRES_USER=test -p 5432:5432 timescale/timescaledb:latest-pg14
 ```
 
-### 5. Ejecutar Migraciones con Alembic
+Los demás microservicios (`reservas.vuelos` y `gestion.usuarios`) **se conectarán a esta base de datos sin necesidad de levantar otro contenedor**.
+
+
+### 🔹 **4️⃣ Ejecutar migraciones con Alembic**
 ```bash
 alembic upgrade head
 ```
 
-### 6. Ejecutar el Servidor FastAPI
+### 🔹 **5️⃣ Iniciar el microservicio** 🚀
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn main:app --reload --port 8086
 ```
 
-El servicio estará disponible en: [http://localhost:8000/docs](http://localhost:8000/docs)
+---
 
-## Endpoints Principales
-- `GET /flights/search`: Búsqueda de vuelos según origen, destino y fecha.
-
-## Pruebas
-Para ejecutar las pruebas unitarias:
+## 📂 **Estructura del Proyecto**
 ```bash
-pytest
+📦 buscar.vuelos
+ ┣ 📂 app
+ ┃ ┣ 📂 database
+ ┃ ┣ 📂 models
+ ┃ ┣ 📂 routes
+ ┃ ┣ 📂 schemas
+ ┣ 📜 config.py
+ ┣ 📜 main.py
+ ┣ 📜 requirements.txt
+ ┣ 📜 alembic.ini
+ ┣ 📂 alembic
+ ┣ 📜 .gitignore
+ ┣ 📜 README.md
 ```
 
-## Contribución
-Si deseas contribuir, crea un *fork* del repositorio, realiza tus cambios en una rama y abre un *pull request*.
+---
 
-## Licencia
-Este proyecto está bajo una licencia abierta. Puedes modificarlo y distribuirlo según tus necesidades.
+## 📜 **Swagger - Documentación de la API**
+El microservicio expone su documentación en Swagger automáticamente.
+
+📌 **Accede a Swagger en:** [http://127.0.0.1:8086/docs](http://127.0.0.1:8086/docs)
+
 

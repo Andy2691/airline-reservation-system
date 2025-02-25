@@ -11,7 +11,7 @@ class Settings(BaseSettings):
 
     API_PREFIX: str = "/reservarVuelos"  
     VERSION: str = "0.0.1"
-    PROJECT_NAME: str = "Reservar Vuelos"  
+    PROJECT_NAME: str = "Gestions de Usuarios"  
     DESCRIPTION: str = "Restful API - RESERVAR VUELOS"  
 
 settings = Settings()

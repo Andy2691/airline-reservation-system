@@ -8,7 +8,6 @@ Este microservicio permite gestionar las reservas de vuelos, permitiendo a los u
 - **Framework**: FastAPI
 - **Base de Datos**: PostgreSQL
 - **ORM**: SQLAlchemy
-- **Autenticación**: OAuth2 con JWT
 - **Gestión de Dependencias**: Pydantic
 - **Migraciones**: Alembic
 - **Versionado**: Git + GitHub
@@ -58,7 +57,7 @@ pip install -r requirements.txt
 ### 4. Configurar la Base de Datos
 Levantar un contenedor PostgreSQL con Docker:
 ```bash
-docker run --name reservas-db -e POSTGRES_PASSWORD=test -e POSTGRES_DB=reservas -e POSTGRES_USER=test -p 5434:5432 timescale/timescaledb:latest-pg14
+docker run --name flights-db -e POSTGRES_PASSWORD=test -e POSTGRES_DB=flights -e POSTGRES_USER=test -p 5434:5432 timescale/timescaledb:latest-pg14
 ```
 
 ### 5. Ejecutar Migraciones con Alembic
@@ -68,10 +67,10 @@ alembic upgrade head
 
 ### 6. Ejecutar el Servidor FastAPI
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8088 --reload
+uvicorn main:app --host 0.0.0.0 --port 8085 --reload
 ```
 
-El servicio estará disponible en: [http://localhost:8088/docs](http://localhost:8088/docs)
+El servicio estará disponible en: [http://localhost:8085/docs]
 
 ## Endpoints Principales
 - `POST /reservations/`: Crear una nueva reserva.
@@ -85,9 +84,4 @@ Para ejecutar las pruebas unitarias:
 pytest
 ```
 
-## Contribución
-Si deseas contribuir, crea un *fork* del repositorio, realiza tus cambios en una rama y abre un *pull request*.
-
-## Licencia
-Este proyecto está bajo una licencia abierta. Puedes modificarlo y distribuirlo según tus necesidades.
 

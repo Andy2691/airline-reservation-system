@@ -1,92 +1,82 @@
-# Microservicio: Gestión de Usuarios
+# 👤 Microservicio: Gestión de Usuarios
 
-## Descripción
-Este microservicio maneja la gestión de usuarios, incluyendo autenticación, registro y administración de cuentas de usuario. También gestiona la asignación de reservas de vuelos a usuarios.
+## 📌 Descripción
 
-## Tecnologías Utilizadas
-- **Lenguaje**: Python 3.10+
-- **Framework**: FastAPI
-- **Base de Datos**: PostgreSQL
-- **ORM**: SQLAlchemy
-- **Autenticación**: OAuth2 con JWT
-- **Gestión de Dependencias**: Pydantic
-- **Migraciones**: Alembic
-- **Versionado**: Git + GitHub
-- **Pruebas**: Pytest
+El microservicio **Gestión de Usuarios** permite la administración de usuarios dentro del sistema de reservas de aerolíneas. Se encarga del registro, autenticación y gestión de perfiles de usuarios.
 
-## Estructura del Proyecto
-```
-gestion.usuarios/
-│── app/
-│   ├── auth/                    # Módulo de autenticación
-│   ├── database/                # Configuración de la base de datos
-│   ├── models/                  # Modelos de datos (SQLAlchemy)
-│   │   ├── schema/
-│   │   │   ├── users.py
-│   │   │   ├── reservations.py
-│   ├── routes/                  # Endpoints del microservicio
-│   │   ├── users.py
-│   │   ├── dependencies.py
-│── venv/                        # Entorno virtual de Python
-│── alembic.ini                   # Configuración de migraciones
-│── config.py                      # Variables de configuración
-│── main.py                        # Punto de entrada de FastAPI
-│── README.md                      # Documentación del proyecto
-│── requirements.txt                # Dependencias del proyecto
-```
+### 📍 Funcionalidades principales
 
-## Instalación y Configuración
+- ✍️ **Registro de usuarios**
+- 🔐 **Autenticación con JWT**
+- 🛠️ **Gestión de perfiles de usuario**
+- 🔄 **Actualización de datos del usuario**
 
-### 1. Clonar el Repositorio
+---
+
+## 📥 **Clonar el repositorio**
+
+Para obtener una copia local del proyecto, ejecuta el siguiente comando:
+
 ```bash
-git clone https://github.com/tu_usuario/gestion-usuarios.git
-cd gestion-usuarios
+git clone https://github.com/Andy2691/airline-reservation-system.git
+cd airline-reservation-system/gestion.usuarios
 ```
 
-### 2. Crear y Activar un Entorno Virtual
+---
+
+## ⚙️ **Configuración y Ejecución**
+
+### 🔹 **1️⃣ Configurar entorno virtual**
+Cada microservicio debe ejecutarse en su propio entorno virtual.
+
 ```bash
+# Windows
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+venv\Scripts\activate
+
+# Mac/Linux
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-### 3. Instalar Dependencias
+### 🔹 **2️⃣ Instalar dependencias**
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configurar la Base de Datos
-Levantar un contenedor PostgreSQL con Docker:
+### 🔹 **3️⃣ Configurar la Base de Datos**
+Si aún no se ha levantado el contenedor PostgreSQL en la configuración principal del proyecto, ejecuta:
 ```bash
-docker run --name users-db -e POSTGRES_PASSWORD=test -e POSTGRES_DB=users -e POSTGRES_USER=test -p 5433:5432 timescale/timescaledb:latest-pg14
+docker run --name flights -e POSTGRES_PASSWORD=test -e POSTGRES_DB=flights -e POSTGRES_USER=test -p 5432:5432 timescale/timescaledb:latest-pg14
 ```
 
-### 5. Ejecutar Migraciones con Alembic
+### 🔹 **4️⃣ Iniciar el microservicio** 🚀
 ```bash
-alembic upgrade head
+uvicorn main:app --reload --port 8085
 ```
 
-### 6. Ejecutar el Servidor FastAPI
+---
+
+## 📂 **Estructura del Proyecto**
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8087 --reload
+📦 gestion.usuarios
+ ┣ 📂 app
+ ┃ ┣ 📂 database
+ ┃ ┣ 📂 models
+ ┃ ┣ 📂 routes
+ ┃ ┣ 📂 schemas
+ ┣ 📜 config.py
+ ┣ 📜 main.py
+ ┣ 📜 requirements.txt
+ ┣ 📜 .gitignore
+ ┣ 📜 README.md
 ```
 
-El servicio estará disponible en: [http://localhost:8087/docs](http://localhost:8087/docs)
+---
 
-## Endpoints Principales
-- `POST /users/register`: Registro de un nuevo usuario.
-- `POST /users/login`: Autenticación de usuario.
-- `GET /users/me`: Obtiene información del usuario autenticado.
-- `GET /users/{user_id}/reservations`: Obtiene las reservas de un usuario.
+## 📜 **Swagger - Documentación de la API**
+El microservicio expone su documentación en Swagger automáticamente.
 
-## Pruebas
-Para ejecutar las pruebas unitarias:
-```bash
-pytest
-```
+📌 **Accede a Swagger en:** [http://127.0.0.1:8085/docs](http://127.0.0.1:8085/docs)
 
-## Contribución
-Si deseas contribuir, crea un *fork* del repositorio, realiza tus cambios en una rama y abre un *pull request*.
-
-## Licencia
-Este proyecto está bajo una licencia abierta. Puedes modificarlo y distribuirlo según tus necesidades.
 
